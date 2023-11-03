@@ -1,0 +1,36 @@
+name: Build V8
+on: [push]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-mac:
+    name: mac
+    runs-on: macos-12
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [arm64]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: setup v8 build tools
+        run: |
+          git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+          export PATH="$GITHUB_WORKSPACE/depot_tools:${PATH}"
+          gclient
+          fetch v8
+      - name: fetch beta branch
+        run: |
+          export PATH="$GITHUB_WORKSPACE/depot_tools:${PATH}"
+          cd $GITHUB_WORKSPACE/v8
+          mkdir -p out.gn/${{ matrix.platform }}.release/obj
+          touch out.gn/${{ matrix.platform }}.release/obj/libv8_monolith.a
+      - name: Upload static library
+        uses: actions/upload-artifact@v3
+        with:
+          path: ${{ github.workspace }}/v8/out.gn/${{ matrix.platform }}.release/obj/libv8_monolith.a
+          name: libv8_monolith-mac-${{ matrix.platform }}.a
