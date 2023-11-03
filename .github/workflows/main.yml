@@ -6,13 +6,13 @@ defaults:
     shell: bash
 
 jobs:
-  build-mac:
-    name: mac
-    runs-on: macos-12
+  build-linux:
+    name: linux
+    runs-on: ubuntu-22.04
     strategy:
       fail-fast: false
       matrix:
-        platform: [arm64]
+        platform: [x64]
     steps:
       - uses: actions/checkout@v3
         with:
@@ -23,6 +23,7 @@ jobs:
           export PATH="$GITHUB_WORKSPACE/depot_tools:${PATH}"
           gclient
           fetch v8
+          g++ --version
       - name: fetch beta branch
         run: |
           export PATH="$GITHUB_WORKSPACE/depot_tools:${PATH}"
