@@ -22,3 +22,5 @@ jobs:
           cp zips/libv8_monolith-mac-${{ matrix.platform }}.a.zip ./
           unzip libv8_monolith-mac-${{ matrix.platform }}.a.zip
           make spin-${{ matrix.platform }}
+          ./spin
+          ./spin 1
