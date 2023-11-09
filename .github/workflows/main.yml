@@ -26,3 +26,8 @@ jobs:
           ls -lah
           ./spin
           ./spin 1
+      - name: Upload binary
+        uses: actions/upload-artifact@v3
+        with:
+          path: ${{ github.workspace }}/spin
+          name: spin-${{ matrix.platform }}
