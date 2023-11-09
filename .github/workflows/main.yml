@@ -8,7 +8,7 @@ defaults:
 jobs:
   build-mac:
     name: mac
-    runs-on: macos-13
+    runs-on: macos-12
     strategy:
       fail-fast: false
       matrix:
@@ -20,7 +20,6 @@ jobs:
       - name: compile
         run: |
           make macos-${{ matrix.platform }}
-          ./spin 1
       - name: Upload binary
         uses: actions/upload-artifact@v3
         with:
@@ -41,7 +40,6 @@ jobs:
       - name: compile
         run: |
           make linux-${{ matrix.platform }}
-          ./spin 1
       - name: Upload binary
         uses: actions/upload-artifact@v3
         with:
