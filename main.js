@@ -1,0 +1,1 @@
+spin.print('hello\n')
