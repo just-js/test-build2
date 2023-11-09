@@ -24,8 +24,6 @@ jobs:
           make spin-${{ matrix.platform }}
           sysctl -n machdep.cpu.brand_string
           ls -lah
-          ./spin
-          ./spin 1
       - name: Upload binary
         uses: actions/upload-artifact@v3
         with:
