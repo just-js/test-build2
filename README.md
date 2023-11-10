@@ -1,3 +1,10 @@
+# download and extract latest tarball
+
+```
+curl -o v0.0.2.tar.gz -v https://github.com/just-js/test-build2/archive/refs/tags/v0.0.2.tar.gz
+tar -xvf v0.0.2.tar.gz
+```
+
 # building on raspberry pi/debian arm64
 
 ## with clang - NOTE: This is currently Broken
